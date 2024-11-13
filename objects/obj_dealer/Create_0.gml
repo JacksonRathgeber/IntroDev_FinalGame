@@ -153,4 +153,3 @@ function charge(user){
 	}
 	audio_play_sound(snd_charge, 1, false);
 }
-
