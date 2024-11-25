@@ -200,6 +200,7 @@ switch(global.state){
 				ds_list_clear(opponent_hand);
 				
 				if(global.health_arr[0]<=0 or global.health_arr[1]<=0){
+					audio_stop_all();
 					room_goto(rm_end);
 				}
 				else {

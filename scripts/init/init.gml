@@ -60,4 +60,4 @@ part_system_depth(global.partSystem,-2);
 
 
 
-global.health_arr = [15,15];
+global.health_arr = [5,5];
