@@ -65,6 +65,10 @@ for(var _i = 0; _i < num_cards; _i++)
 
 audio_play_sound(snd_music, 1, true);
 
+narrator = instance_nearest(x,y,obj_narrator);
+turn_list = ds_list_create();
+
+//----------------------------------RPS LOGIC------------------------------------
 
 function attack(attacker){
 	if(attacker == "player")
@@ -72,7 +76,7 @@ function attack(attacker){
 		global.health_arr[1] -= 1 + player_is_charged;
 		player_is_charged = 0;
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
-		show_debug_message("Player attacks!");
+		ds_list_add(turn_list,"Player attacks!");
 		
 	}
 	else if(attacker == "opp")
@@ -81,7 +85,7 @@ function attack(attacker){
 		opp_is_charged = 0;
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		_anim.image_angle = 180;
-		show_debug_message("Opponent attacks!");
+		ds_list_add(turn_list,"Opponent attacks!");
 		
 	} else 
 	{
@@ -99,7 +103,7 @@ function parry(parrier){
 		opp_is_charged = 0;
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		part_particles_create(global.partSystem, room_width/2, 3*room_height/4, global.ptParry, 1);
-		show_debug_message("Player parries!");
+		ds_list_add(turn_list, "Player parries!");
 		
 	}
 	else if(parrier == "opp")
@@ -110,7 +114,7 @@ function parry(parrier){
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		//_anim.image_angle = 180;
 		part_particles_create(global.partSystem, room_width/2, room_height/4, global.ptParry, 1);
-		show_debug_message("Opponent parries!");
+		ds_list_add(turn_list, "Opponent parries!");
 		
 	} else 
 	{
@@ -126,11 +130,11 @@ function charge(user){
 		if(!player_is_charged)
 		{
 			player_is_charged = 2;
-			show_debug_message("Player charges!");
+			ds_list_add(turn_list, "Player charges!");
 		}
 		else
 		{
-			show_debug_message("Player is already charged!");
+			ds_list_add(turn_list, "Player is already charged!");
 		}
 		
 	}
@@ -139,11 +143,11 @@ function charge(user){
 		if(!opp_is_charged)
 		{
 			opp_is_charged = 2;
-			show_debug_message("Opponent charges!");
+			ds_list_add(turn_list, "Opponent charges!");
 		}
 		else
 		{
-			show_debug_message("Opponent is already charged!");
+			ds_list_add(turn_list, "Opponent is already charged!");
 		}
 		
 	} else 
