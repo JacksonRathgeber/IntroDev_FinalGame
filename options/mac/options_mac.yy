@@ -5,6 +5,7 @@
   "option_mac_display_name": "Made in GameMaker Studio 2",
   "option_mac_app_id": "com.company.game",
   "option_mac_version": "1.0.0.0",
+  "option_mac_build_number": 0,
   "option_mac_output_dir": "~/GameMakerStudio2/Mac",
   "option_mac_team_id": null,
   "option_mac_signing_identity": "Developer ID Application:",

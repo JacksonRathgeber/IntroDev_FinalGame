@@ -1,6 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+draw_set_alpha(1);
+
 if(abs(x - target_x) > 1){
 	x = lerp(x, target_x, 0.2);
 } else {

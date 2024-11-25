@@ -3,6 +3,7 @@
 
 draw_set_font(font);
 draw_set_color(c_red);
+draw_set_alpha(1);
 
 draw_text(x,y-25,global.health_arr[health_var]);
 

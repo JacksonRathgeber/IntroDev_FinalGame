@@ -129,11 +129,11 @@ switch(global.state){
 			var _dummy_list = ds_list_create();
 			if(ds_list_size(turn_list)>0){
 				ds_list_copy(_dummy_list, turn_list);
-				ds_list_add(narrator.text_list, _dummy_list);
 			}
 			else{
 				ds_list_add(_dummy_list, "Nothing happened!");
 			}
+			ds_list_add(narrator.text_list, _dummy_list);
 			ds_list_mark_as_list(narrator.text_list, ds_list_size(narrator.text_list)-1);
 			ds_list_clear(turn_list);
 			//ds_list_destroy(_dummy_list);

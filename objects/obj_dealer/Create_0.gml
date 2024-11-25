@@ -67,25 +67,65 @@ audio_play_sound(snd_music, 1, true);
 
 narrator = instance_nearest(x,y,obj_narrator);
 turn_list = ds_list_create();
+damage_list = ds_list_create();
 
 //----------------------------------RPS LOGIC------------------------------------
 
 function attack(attacker){
 	if(attacker == "player")
 	{
-		global.health_arr[1] -= 1 + player_is_charged;
-		player_is_charged = 0;
+		ds_list_add(damage_list, 1);
+		if(player_is_charged){
+			ds_list_add(damage_list, 1);
+			player_is_charged = 0;
+		}
+		for(i=0;i<ds_list_size(damage_list); i++){
+			global.health_arr[1] -= damage_list[| i];
+		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		ds_list_add(turn_list,"Player attacks!");
 		
+		var _calc_str = "Opponent takes ";
+		
+		for(i=0; i<ds_list_size(damage_list); i++){
+			_calc_str += string(damage_list[| i]);
+			if(i<ds_list_size(damage_list)-1){
+				_calc_str+=" + ";
+			}
+			else {
+				_calc_str += " damage!";
+			}
+		}
+		ds_list_add(turn_list, _calc_str);
+		ds_list_clear(damage_list);
 	}
 	else if(attacker == "opp")
 	{
-		global.health_arr[0] -= 1 + opp_is_charged;
-		opp_is_charged = 0;
+		ds_list_add(damage_list, 1);
+		if(opp_is_charged){
+			ds_list_add(damage_list, 1);
+			opp_is_charged = 0;
+		}
+		for(i=0;i<ds_list_size(damage_list); i++){
+			global.health_arr[0] -= damage_list[| i];
+		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		_anim.image_angle = 180;
 		ds_list_add(turn_list,"Opponent attacks!");
+		
+		var _calc_str = "Player takes ";
+		
+		for(i=0; i<ds_list_size(damage_list); i++){
+			_calc_str += string(damage_list[| i]);
+			if(i<ds_list_size(damage_list)-1){
+				_calc_str+=" + ";
+			}
+			else {
+				_calc_str += " damage!";
+			}
+		}
+		ds_list_add(turn_list, _calc_str);
+		ds_list_clear(damage_list);
 		
 	} else 
 	{
@@ -98,9 +138,19 @@ function attack(attacker){
 function parry(parrier){
 	if(parrier == "player")
 	{
-		global.health_arr[1] -= 2 + player_is_charged + opp_is_charged;
-		player_is_charged = 0;
-		opp_is_charged = 0;
+		ds_list_add(damage_list, 2);
+		if(player_is_charged){
+			ds_list_add(damage_list, 1);
+			player_is_charged = 0;
+		}
+		if(opp_is_charged){
+			ds_list_add(damage_list, 1);
+			opp_is_charged = 0;
+		}
+		for(i=0;i<ds_list_size(damage_list); i++){
+			global.health_arr[1] -= damage_list[| i];
+		}
+		ds_list_clear(damage_list);
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		part_particles_create(global.partSystem, room_width/2, 3*room_height/4, global.ptParry, 1);
 		ds_list_add(turn_list, "Player parries!");
@@ -108,9 +158,19 @@ function parry(parrier){
 	}
 	else if(parrier == "opp")
 	{
-		global.health_arr[0] -= 2 + player_is_charged + opp_is_charged;
-		player_is_charged = 0;
-		opp_is_charged = 0;
+		ds_list_add(damage_list, 2);
+		if(player_is_charged){
+			ds_list_add(damage_list, 1);
+			player_is_charged = 0;
+		}
+		if(opp_is_charged){
+			ds_list_add(damage_list, 1);
+			opp_is_charged = 0;
+		}
+		for(i=0;i<ds_list_size(damage_list); i++){
+			global.health_arr[0] -= damage_list[| i];
+		}
+		ds_list_clear(damage_list);
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		//_anim.image_angle = 180;
 		part_particles_create(global.partSystem, room_width/2, room_height/4, global.ptParry, 1);
