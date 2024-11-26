@@ -138,6 +138,10 @@ switch(global.state){
 			ds_list_clear(turn_list);
 			//ds_list_destroy(_dummy_list);
 			
+			while(ds_list_size(narrator.text_list)>4){
+				ds_list_delete(narrator.text_list, 0);
+			}
+			
 			comparison_done = true;
 
 			//show_debug_message("Player health is now " + string(global.health_arr[0]));
@@ -197,8 +201,8 @@ switch(global.state){
 			
 			
 			if(_card_num > 0){
-				_next_card.target_x = room_width * 0.9;
-				_next_card.target_y = room_height/2 - ds_list_size(discard)*deck_y_offset;
+				_next_card.target_x = discard_x;
+				_next_card.target_y = discard_y - ds_list_size(discard)*deck_y_offset;
 				_next_card.depth = -ds_list_size(discard);
 				_next_card.face_up = true;
 				audio_play_sound(snd_card, 1, false);

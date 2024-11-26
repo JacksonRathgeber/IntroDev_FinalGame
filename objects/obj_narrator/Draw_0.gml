@@ -10,7 +10,7 @@ for(i=0; i<ds_list_size(text_list); i++){
 	
 	for(j=0; j<ds_list_size(text_list[| i]); j++){
 		
-		draw_text(x, y+20*j+80*(ds_list_size(text_list)-i), text_list[| i][| j]);
+		draw_text(x, y+20*j+40*(ds_list_size(text_list)-i), text_list[| i][| j]);
 		
 	}
 }

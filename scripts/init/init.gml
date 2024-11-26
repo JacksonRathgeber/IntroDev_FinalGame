@@ -60,4 +60,20 @@ part_system_depth(global.partSystem,-2);
 
 
 
+var _pS = part_type_create();
+
+part_type_shape(_pS, pt_shape_disk);
+part_type_life(_pS, 150, 200);
+
+part_type_alpha1(_pS, 0.55);
+part_type_color1(_pS,c_white);
+part_type_size(_pS, 0.025, 0.075, 0,0);
+
+part_type_speed(_pS, 3, 12, 0, 0);
+part_type_direction(_pS, 195, 255,0,0.2);
+
+global.ptSnow = _pS;
+
+
+
 global.health_arr = [15,15];

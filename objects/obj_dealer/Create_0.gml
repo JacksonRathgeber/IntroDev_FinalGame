@@ -40,6 +40,12 @@ movement_done = false;
 move_timer = 0;
 delay_timer = 0;
 
+x = room_width * 0.1;
+y = room_height/3;
+
+discard_x = x;
+discard_y = room_height*2/3;
+
 for(var _i = 0; _i < num_cards; _i++)
 {
 	var _new_card = instance_create_layer(x,y,"Cards", obj_card);
