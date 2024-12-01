@@ -4,10 +4,10 @@
 draw_set_color(c_white);
 
 draw_set_font(title_font);
-draw_text(room_width/2, room_height/6, "KNIGHTFALL");
+draw_text(display_get_gui_width()/2, display_get_gui_height()*0.25, "KNIGHTFALL");
 
 draw_set_font(text_font);
-draw_text(room_width/2, 3*room_height/5, @"INSTRUCTIONS:
+draw_text(display_get_gui_width()/2, display_get_gui_height()*0.6, @"INSTRUCTIONS:
 
 Each round, click a card from your hand to play it.
 
