@@ -1,6 +1,12 @@
 /// @description Insert description here
 // You can write your code in this editor
 
+x = room_width*0.15;
+y = room_height/2;
+
+discard_x = room_width*0.85;
+discard_y = y;
+
 enum STATES
 {
 	DEAL,
@@ -40,12 +46,6 @@ movement_done = false;
 move_timer = 0;
 delay_timer = 0;
 
-x = room_width * 0.1;
-y = room_height/3;
-
-discard_x = x;
-discard_y = room_height*2/3;
-
 for(var _i = 0; _i < num_cards; _i++)
 {
 	var _new_card = instance_create_layer(x,y,"Cards", obj_card);
@@ -74,6 +74,7 @@ audio_play_sound(snd_music, 1, true);
 narrator = instance_nearest(x,y,obj_narrator);
 turn_list = ds_list_create();
 damage_list = ds_list_create();
+narr_text = "";
 
 //----------------------------------RPS LOGIC------------------------------------
 
@@ -89,7 +90,8 @@ function attack(attacker){
 			global.health_arr[1] -= damage_list[| i];
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
-		ds_list_add(turn_list,"Player attacks!");
+		narr_text += "Player attacks! ";
+		//ds_list_add(turn_list,"Player attacks!\n");
 		
 		var _calc_str = "Opponent takes ";
 		
@@ -99,10 +101,11 @@ function attack(attacker){
 				_calc_str+=" + ";
 			}
 			else {
-				_calc_str += " damage!";
+				_calc_str += " damage!\n";
 			}
 		}
-		ds_list_add(turn_list, _calc_str);
+		narr_text += _calc_str;
+		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 	}
 	else if(attacker == "opp")
@@ -117,7 +120,8 @@ function attack(attacker){
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		_anim.image_angle = 180;
-		ds_list_add(turn_list,"Opponent attacks!");
+		narr_text += "Opponent attacks! ";
+		//ds_list_add(turn_list,"Opponent attacks!\n");
 		
 		var _calc_str = "Player takes ";
 		
@@ -127,10 +131,11 @@ function attack(attacker){
 				_calc_str+=" + ";
 			}
 			else {
-				_calc_str += " damage!";
+				_calc_str += " damage!\n";
 			}
 		}
-		ds_list_add(turn_list, _calc_str);
+		narr_text += _calc_str;
+		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
 	} else 
@@ -158,7 +163,8 @@ function parry(parrier){
 		}
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		part_particles_create(global.partSystem, room_width/2, 3*room_height/4, global.ptParry, 1);
-		ds_list_add(turn_list, "Player parries!");
+		narr_text += "Player parries! "
+		//ds_list_add(turn_list, "Player parries!\n");
 		
 		var _calc_str = "Opponent takes ";
 		
@@ -168,10 +174,11 @@ function parry(parrier){
 				_calc_str+=" + ";
 			}
 			else {
-				_calc_str += " damage!";
+				_calc_str += " damage!\n";
 			}
 		}
-		ds_list_add(turn_list, _calc_str);
+		narr_text += _calc_str;
+		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
 	}
@@ -192,7 +199,8 @@ function parry(parrier){
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		//_anim.image_angle = 180;
 		part_particles_create(global.partSystem, room_width/2, room_height/4, global.ptParry, 1);
-		ds_list_add(turn_list, "Opponent parries!");
+		narr_text += "Opponent parries!\n"
+		//ds_list_add(turn_list, "Opponent parries!\n");
 		
 		var _calc_str = "Player takes ";
 		
@@ -202,10 +210,11 @@ function parry(parrier){
 				_calc_str+=" + ";
 			}
 			else {
-				_calc_str += " damage!";
+				_calc_str += " damage!\n";
 			}
 		}
-		ds_list_add(turn_list, _calc_str);
+		narr_text += _calc_str;
+		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
 	} else 
@@ -222,11 +231,13 @@ function charge(user){
 		if(!player_is_charged)
 		{
 			player_is_charged = 2;
-			ds_list_add(turn_list, "Player charges!");
+			narr_text += "Player charges!\n";
+			//ds_list_add(turn_list, "Player charges!");
 		}
 		else
 		{
-			ds_list_add(turn_list, "Player is already charged!");
+			narr_text += "Player is already charged!\n";
+			//ds_list_add(turn_list, "Player is already charged!");
 		}
 		
 	}
@@ -235,11 +246,13 @@ function charge(user){
 		if(!opp_is_charged)
 		{
 			opp_is_charged = 2;
-			ds_list_add(turn_list, "Opponent charges!");
+			narr_text += "Opponent charges!\n";
+			//ds_list_add(turn_list, "Opponent charges!");
 		}
 		else
 		{
-			ds_list_add(turn_list, "Opponent is already charged!");
+			narr_text += "Opponent is already charged!\n";
+			//ds_list_add(turn_list, "Opponent is already charged!");
 		}
 		
 	} else 

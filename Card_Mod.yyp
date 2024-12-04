@@ -6,6 +6,7 @@
     {"id":{"name":"snd_win","path":"sounds/snd_win/snd_win.yy",},"order":8,},
     {"id":{"name":"snd_lose","path":"sounds/snd_lose/snd_lose.yy",},"order":9,},
     {"id":{"name":"spr_para_back","path":"sprites/spr_para_back/spr_para_back.yy",},"order":11,},
+    {"id":{"name":"spr_narrator","path":"sprites/spr_narrator/spr_narrator.yy",},"order":13,},
     {"id":{"name":"spr_heart","path":"sprites/spr_heart/spr_heart.yy",},"order":8,},
     {"id":{"name":"snd_music","path":"sounds/snd_music/snd_music.yy",},"order":6,},
     {"id":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},"order":2,},

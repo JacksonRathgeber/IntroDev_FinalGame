@@ -29,7 +29,7 @@ switch(global.state){
 				ds_list_delete(deck, ds_list_size(deck)-1);
 				ds_list_add(opponent_hand, _dealt_card);
 				_dealt_card.target_x = (room_width/2 - hand_x_offset) + _opp_num * hand_x_offset;
-				_dealt_card.target_y = room_height * 0.2;
+				_dealt_card.target_y = room_height * 0.15;
 				_dealt_card.in_opp_hand = true;
 				_dealt_card.face_up = false;
 				audio_play_sound(snd_card, 1, false);
@@ -40,7 +40,7 @@ switch(global.state){
 				ds_list_delete(deck, ds_list_size(deck)-1);
 				ds_list_add(player_hand, _dealt_card);
 				_dealt_card.target_x = (room_width/2 - hand_x_offset) + _player_num * hand_x_offset
-				_dealt_card.target_y = room_height * 0.8;
+				_dealt_card.target_y = room_height * 0.7;
 				_dealt_card.in_player_hand = true;
 				//_dealt_card.face_up = true;
 				audio_play_sound(snd_card, 1, false);
@@ -55,18 +55,22 @@ switch(global.state){
 		break;
 	
 	case STATES.CHOOSE:
+		narr_text = "What will you do?";
+		narrator.text = narr_text;
+		
 		if(ds_list_size(obj_dealer.opponent_selected) == 0)
 		{
 			ds_list_shuffle(opponent_hand);
 			var _opp_card = ds_list_find_value(opponent_hand, 0);
 			_opp_card.target_x = room_width / 2;
-			_opp_card.target_y = room_height * 0.4;
+			_opp_card.target_y = room_height * 0.325;
 			ds_list_add(opponent_selected, _opp_card);
 			audio_play_sound(snd_card, 1, false);
 		}
 		
 		if(ds_list_size(player_selected) == 1 and ds_list_size(opponent_selected) == 1){
 			global.state = STATES.COMPARE;
+			narr_text = "";
 		}
 		break;
 		
@@ -126,6 +130,10 @@ switch(global.state){
 			else { //---------------OPP CHARGE----------------------
 				charge("opp");
 			}
+			
+			narrator.text = narr_text;
+			
+			/*
 			var _dummy_list = ds_list_create();
 			if(ds_list_size(turn_list)>0){
 				ds_list_copy(_dummy_list, turn_list);
@@ -138,9 +146,10 @@ switch(global.state){
 			ds_list_clear(turn_list);
 			//ds_list_destroy(_dummy_list);
 			
-			while(ds_list_size(narrator.text_list)>4){
+			while(ds_list_size(narrator.text_list)>1){
 				ds_list_delete(narrator.text_list, 0);
 			}
+			*/
 			
 			comparison_done = true;
 

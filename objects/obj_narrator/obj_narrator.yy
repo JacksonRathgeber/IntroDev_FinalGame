@@ -2,7 +2,10 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "obj_narrator",
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_narrator",
+    "path": "sprites/spr_narrator/spr_narrator.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,
