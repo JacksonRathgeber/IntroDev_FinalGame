@@ -9,7 +9,7 @@ draw_set_color(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 
-draw_text(x+30, y+25, text);
+draw_text_scrolling(x+30, y+25, text, 0.5, 10, noone);
 
 /*
 for(i=0; i<ds_list_size(text_list); i++){

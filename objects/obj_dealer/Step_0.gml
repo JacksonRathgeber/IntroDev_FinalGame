@@ -49,14 +49,17 @@ switch(global.state){
 					var _player_card = ds_list_find_value(player_hand, _i);
 					_player_card.face_up = true;
 				}
+				narrator.draw_text_reset();
 				global.state = STATES.CHOOSE;
 			}
 		}
 		break;
 	
 	case STATES.CHOOSE:
-		narr_text = "What will you do?";
-		narrator.text = narr_text;
+		if(!place_meeting(mouse_x, mouse_y, obj_card)){
+			//narrator.draw_text_reset();
+			narrator.text = "What will you do?";
+		}
 		
 		if(ds_list_size(obj_dealer.opponent_selected) == 0)
 		{
@@ -69,8 +72,8 @@ switch(global.state){
 		}
 		
 		if(ds_list_size(player_selected) == 1 and ds_list_size(opponent_selected) == 1){
+			narrator.text = "";
 			global.state = STATES.COMPARE;
-			narr_text = "";
 		}
 		break;
 		
@@ -89,7 +92,6 @@ switch(global.state){
 		_opp_card.face_up = true;
 		var _player_ind = _player_card.face_index;
 		var _opp_ind = _opp_card.face_index;
-		
 		
 		if(!comparison_done)
 		{
@@ -131,8 +133,9 @@ switch(global.state){
 				charge("opp");
 			}
 			
-			narrator.text = narr_text;
-			
+			if(narrator.text == ""){
+				narrator.text += "Nothing happened!";
+			}
 			/*
 			var _dummy_list = ds_list_create();
 			if(ds_list_size(turn_list)>0){

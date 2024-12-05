@@ -74,7 +74,6 @@ audio_play_sound(snd_music, 1, true);
 narrator = instance_nearest(x,y,obj_narrator);
 turn_list = ds_list_create();
 damage_list = ds_list_create();
-narr_text = "";
 
 //----------------------------------RPS LOGIC------------------------------------
 
@@ -90,7 +89,7 @@ function attack(attacker){
 			global.health_arr[1] -= damage_list[| i];
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
-		narr_text += "Player attacks! ";
+		narrator.text += "Player attacks! ";
 		//ds_list_add(turn_list,"Player attacks!\n");
 		
 		var _calc_str = "Opponent takes ";
@@ -104,7 +103,7 @@ function attack(attacker){
 				_calc_str += " damage!\n";
 			}
 		}
-		narr_text += _calc_str;
+		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 	}
@@ -120,7 +119,7 @@ function attack(attacker){
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		_anim.image_angle = 180;
-		narr_text += "Opponent attacks! ";
+		narrator.text += "Opponent attacks! ";
 		//ds_list_add(turn_list,"Opponent attacks!\n");
 		
 		var _calc_str = "Player takes ";
@@ -134,7 +133,7 @@ function attack(attacker){
 				_calc_str += " damage!\n";
 			}
 		}
-		narr_text += _calc_str;
+		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
@@ -163,7 +162,7 @@ function parry(parrier){
 		}
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		part_particles_create(global.partSystem, room_width/2, 3*room_height/4, global.ptParry, 1);
-		narr_text += "Player parries! "
+		narrator.text += "Player parries! "
 		//ds_list_add(turn_list, "Player parries!\n");
 		
 		var _calc_str = "Opponent takes ";
@@ -177,7 +176,7 @@ function parry(parrier){
 				_calc_str += " damage!\n";
 			}
 		}
-		narr_text += _calc_str;
+		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
@@ -199,7 +198,7 @@ function parry(parrier){
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		//_anim.image_angle = 180;
 		part_particles_create(global.partSystem, room_width/2, room_height/4, global.ptParry, 1);
-		narr_text += "Opponent parries!\n"
+		narrator.text += "Opponent parries!\n"
 		//ds_list_add(turn_list, "Opponent parries!\n");
 		
 		var _calc_str = "Player takes ";
@@ -213,7 +212,7 @@ function parry(parrier){
 				_calc_str += " damage!\n";
 			}
 		}
-		narr_text += _calc_str;
+		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
@@ -231,12 +230,12 @@ function charge(user){
 		if(!player_is_charged)
 		{
 			player_is_charged = 2;
-			narr_text += "Player charges!\n";
+			narrator.text += "Player charges!\n";
 			//ds_list_add(turn_list, "Player charges!");
 		}
 		else
 		{
-			narr_text += "Player is already charged!\n";
+			narrator.text += "Player is already charged!\n";
 			//ds_list_add(turn_list, "Player is already charged!");
 		}
 		
@@ -246,12 +245,12 @@ function charge(user){
 		if(!opp_is_charged)
 		{
 			opp_is_charged = 2;
-			narr_text += "Opponent charges!\n";
+			narrator.text += "Opponent charges!\n";
 			//ds_list_add(turn_list, "Opponent charges!");
 		}
 		else
 		{
-			narr_text += "Opponent is already charged!\n";
+			narrator.text += "Opponent is already charged!\n";
 			//ds_list_add(turn_list, "Opponent is already charged!");
 		}
 		
