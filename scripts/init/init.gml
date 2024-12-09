@@ -11,7 +11,7 @@ part_type_shape(_p, pt_shape_circle);
 part_type_life(_p, 50, 50);
 
 part_type_alpha2(_p, 1, 0);
-part_type_color1(_p,c_blue);
+part_type_color1(_p,#87CEEB);
 part_type_size(_p, 2, 2, 0.1,0);
 
 part_type_speed(_p, 0, 0, 0, 0);
@@ -76,4 +76,4 @@ global.ptSnow = _pS;
 
 
 
-global.health_arr = [5,5];
+global.health_arr = [15,15];

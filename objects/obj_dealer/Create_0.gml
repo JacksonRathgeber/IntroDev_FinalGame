@@ -22,6 +22,7 @@ hand_x_offset = 100;
 deck_y_offset = 2;
 
 num_cards = 30;
+card_bias = [0,0,0,1,1,2];
 
 deck = ds_list_create();
 player_hand = ds_list_create();
@@ -50,7 +51,7 @@ for(var _i = 0; _i < num_cards; _i++)
 {
 	var _new_card = instance_create_layer(x,y,"Cards", obj_card);
 	//_new_card.face_index = _i % 3;
-	_new_card.face_index = (_i % 5) div 2;
+	_new_card.face_index = card_bias[_i%6];
 	_new_card.face_up = false;
 	_new_card.in_player_hand = false;
 	_new_card.in_opp_hand = false;

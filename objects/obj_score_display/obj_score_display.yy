@@ -2,7 +2,10 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "obj_score_display",
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_score_display",
+    "path": "sprites/spr_score_display/spr_score_display.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,
