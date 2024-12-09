@@ -72,7 +72,6 @@ for(var _i = 0; _i < num_cards; _i++)
 audio_play_sound(snd_music, 1, true);
 
 narrator = instance_nearest(x,y,obj_narrator);
-turn_list = ds_list_create();
 damage_list = ds_list_create();
 
 //----------------------------------RPS LOGIC------------------------------------
@@ -80,6 +79,12 @@ damage_list = ds_list_create();
 function attack(attacker){
 	if(attacker == "player")
 	{
+		narrator.text += "Player attacks! ";
+		var _calc_str = "Opponent takes ";
+		_calc_str += string(1 + obj_dealer.player_is_charged);
+		_calc_str += " damage!\n"
+		narrator.text += _calc_str;
+		
 		ds_list_add(damage_list, 1);
 		if(player_is_charged){
 			ds_list_add(damage_list, 1);
@@ -89,26 +94,19 @@ function attack(attacker){
 			global.health_arr[1] -= damage_list[| i];
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
-		narrator.text += "Player attacks! ";
 		//ds_list_add(turn_list,"Player attacks!\n");
 		
-		var _calc_str = "Opponent takes ";
-		
-		for(i=0; i<ds_list_size(damage_list); i++){
-			_calc_str += string(damage_list[| i]);
-			if(i<ds_list_size(damage_list)-1){
-				_calc_str+=" + ";
-			}
-			else {
-				_calc_str += " damage!\n";
-			}
-		}
-		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 	}
 	else if(attacker == "opp")
 	{
+		narrator.text += "Opponent attacks! ";
+		var _calc_str = "Player takes ";
+		_calc_str += string(1 + obj_dealer.opp_is_charged);
+		_calc_str += " damage!\n"
+		narrator.text += _calc_str;
+		
 		ds_list_add(damage_list, 1);
 		if(opp_is_charged){
 			ds_list_add(damage_list, 1);
@@ -119,21 +117,7 @@ function attack(attacker){
 		}
 		var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		_anim.image_angle = 180;
-		narrator.text += "Opponent attacks! ";
 		//ds_list_add(turn_list,"Opponent attacks!\n");
-		
-		var _calc_str = "Player takes ";
-		
-		for(i=0; i<ds_list_size(damage_list); i++){
-			_calc_str += string(damage_list[| i]);
-			if(i<ds_list_size(damage_list)-1){
-				_calc_str+=" + ";
-			}
-			else {
-				_calc_str += " damage!\n";
-			}
-		}
-		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
@@ -148,6 +132,12 @@ function attack(attacker){
 function parry(parrier){
 	if(parrier == "player")
 	{
+		narrator.text += "Player parries! "
+		var _calc_str = "Opponent takes ";
+		_calc_str += string(2 + obj_dealer.player_is_charged + obj_dealer.opp_is_charged);
+		_calc_str += " damage!\n"
+		narrator.text += _calc_str;
+		
 		ds_list_add(damage_list, 2);
 		if(player_is_charged){
 			ds_list_add(damage_list, 1);
@@ -162,27 +152,19 @@ function parry(parrier){
 		}
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		part_particles_create(global.partSystem, room_width/2, 3*room_height/4, global.ptParry, 1);
-		narrator.text += "Player parries! "
 		//ds_list_add(turn_list, "Player parries!\n");
-		
-		var _calc_str = "Opponent takes ";
-		
-		for(i=0; i<ds_list_size(damage_list); i++){
-			_calc_str += string(damage_list[| i]);
-			if(i<ds_list_size(damage_list)-1){
-				_calc_str+=" + ";
-			}
-			else {
-				_calc_str += " damage!\n";
-			}
-		}
-		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		
 	}
 	else if(parrier == "opp")
 	{
+		narrator.text += "Opponent parries!\n"
+		var _calc_str = "Player takes ";
+		_calc_str += string(2 + obj_dealer.player_is_charged + obj_dealer.opp_is_charged);
+		_calc_str += " damage!\n"
+		narrator.text += _calc_str;
+		
 		ds_list_add(damage_list, 2);
 		if(player_is_charged){
 			ds_list_add(damage_list, 1);
@@ -198,21 +180,8 @@ function parry(parrier){
 		//var _anim = instance_create_layer(room_width/2, room_height/2, "Animations", obj_anim_attack);
 		//_anim.image_angle = 180;
 		part_particles_create(global.partSystem, room_width/2, room_height/4, global.ptParry, 1);
-		narrator.text += "Opponent parries!\n"
 		//ds_list_add(turn_list, "Opponent parries!\n");
 		
-		var _calc_str = "Player takes ";
-		
-		for(i=0; i<ds_list_size(damage_list); i++){
-			_calc_str += string(damage_list[| i]);
-			if(i<ds_list_size(damage_list)-1){
-				_calc_str+=" + ";
-			}
-			else {
-				_calc_str += " damage!\n";
-			}
-		}
-		narrator.text += _calc_str;
 		//ds_list_add(turn_list, _calc_str);
 		ds_list_clear(damage_list);
 		

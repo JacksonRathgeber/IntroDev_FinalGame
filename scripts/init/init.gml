@@ -24,14 +24,14 @@ global.ptParry = _p;
 var _p2 = part_type_create();
 
 part_type_shape(_p2, pt_shape_disk);
-part_type_life(_p2, 75, 100);
+part_type_life(_p2, 20, 40);
 
 part_type_alpha2(_p2, 0.2, 0);
 part_type_color1(_p2,c_green);
-part_type_size(_p2, 0.5, 2, -0.03,0);
+part_type_size(_p2, 0.25, 0.75, -0.01,0);
 part_type_blend(_p2, true);
 
-part_type_speed(_p2, 1.5, 2, 0, 0);
+part_type_speed(_p2, 1.5, 3, 0, 0);
 part_type_direction(_p2, 90, 90,0,0);
 
 global.ptPlayerCharge = _p2;
@@ -41,14 +41,14 @@ global.ptPlayerCharge = _p2;
 var _p2 = part_type_create();
 
 part_type_shape(_p2, pt_shape_disk);
-part_type_life(_p2, 75, 100);
+part_type_life(_p2, 20, 40);
 
 part_type_alpha2(_p2, 0.2, 0);
 part_type_color1(_p2,c_green);
-part_type_size(_p2, 0.5, 2, -0.03,0);
+part_type_size(_p2, 0.25, 0.75, -0.01,0);
 part_type_blend(_p2, true);
 
-part_type_speed(_p2, 1.5, 2, 0, 0);
+part_type_speed(_p2, 1.5, 3, 0, 0);
 part_type_direction(_p2, 270, 270,0,0);
 
 global.ptOppCharge = _p2;

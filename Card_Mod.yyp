@@ -33,7 +33,7 @@
     {"id":{"name":"obj_pause","path":"objects/obj_pause/obj_pause.yy",},"order":8,},
     {"id":{"name":"rm_end","path":"rooms/rm_end/rm_end.yy",},"order":3,},
     {"id":{"name":"snd_charge","path":"sounds/snd_charge/snd_charge.yy",},"order":5,},
-    {"id":{"name":"spr_background","path":"sprites/spr_background/spr_background.yy",},"order":10,},
+    {"id":{"name":"spr_background","path":"sprites/spr_background/spr_background.yy",},"order":14,},
     {"id":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},"order":1,},
   ],
   "Options": [

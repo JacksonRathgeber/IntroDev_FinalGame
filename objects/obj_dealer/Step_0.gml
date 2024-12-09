@@ -324,11 +324,11 @@ if(move_timer == 30){
 }
 
 if(player_is_charged){
-	part_particles_create(global.partSystem, irandom_range(-5, room_width+5), room_height+5, global.ptPlayerCharge, 2);
+	part_particles_create(global.partSystem, irandom_range(-5, room_width+5), room_height+5, global.ptPlayerCharge, 10);
 }
 
 if(opp_is_charged){
-	part_particles_create(global.partSystem, irandom_range(-5, room_width+5), -5, global.ptOppCharge, 2);
+	part_particles_create(global.partSystem, irandom_range(-5, room_width+5), -5, global.ptOppCharge, 10);
 }
 
 
