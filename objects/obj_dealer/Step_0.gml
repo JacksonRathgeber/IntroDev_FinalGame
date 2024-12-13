@@ -228,7 +228,7 @@ switch(global.state){
 				
 				if(global.health_arr[0]<=0 or global.health_arr[1]<=0){
 					audio_stop_all();
-					room_goto(rm_end);
+					TransitionStart(rm_end, seq_fade_out, seq_fade_in);
 				}
 				else {
 					if(ds_list_size(deck) == 0){

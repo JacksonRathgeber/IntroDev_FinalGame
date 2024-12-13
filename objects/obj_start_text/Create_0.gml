@@ -18,3 +18,5 @@ y = 0;
 scroll_speed = 3;
 
 snow_trigger = true;
+
+transition_layer = noone;

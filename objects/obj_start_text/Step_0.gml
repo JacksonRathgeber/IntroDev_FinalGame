@@ -11,8 +11,12 @@ x = lerp(x, x+scroll_speed, 0.08);
 
 if(keyboard_check_pressed(vk_space)){
 	audio_stop_all();
-	room_goto(rm_main);
 	part_particles_clear(global.partSystem);
+	transition_layer = TransitionStart(rm_main, seq_fade_out, seq_fade_in);
+}
+
+if(global.midTransition && layer_exists("Transition")){
+		layer_sequence_x(transition_layer, _cam_x);
 }
 
 if(snow_trigger){

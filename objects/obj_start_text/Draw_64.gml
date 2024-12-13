@@ -22,3 +22,13 @@ green CHARGE cards (depicting an up arrow).
 
 
 Press SPACE to begin the game.");
+
+
+/*
+if(keyboard_check_pressed(vk_space)){
+	TransitionStart(rm_main, seq_fade_out, seq_fade_in);
+	if(global.midTransition && layer_exists("Transition")){
+		layer_x("Transition", 0);
+	}
+}
+*/

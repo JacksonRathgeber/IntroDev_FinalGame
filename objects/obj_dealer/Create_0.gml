@@ -75,6 +75,8 @@ audio_play_sound(snd_music, 1, true);
 narrator = instance_nearest(x,y,obj_narrator);
 damage_list = ds_list_create();
 
+part_system_clear(global.partSystem)
+
 //----------------------------------RPS LOGIC------------------------------------
 
 function attack(attacker){
