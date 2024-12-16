@@ -46,10 +46,7 @@
             ],"resourceVersion":"1.0","resourceType":"KeyframeStore<RealKeyframe>",},"trackColour":4282935794,"inheritsTrackColour":true,"builtinName":15,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"modifiers":[],},
       ],"events":[],"isCreationTrack":false,"modifiers":[],},
   ],
-  "visibleRange": {
-    "x": 0.0,
-    "y": 59.9999,
-  },
+  "visibleRange": null,
   "lockOrigin": false,
   "showBackdrop": true,
   "showBackdropImage": false,

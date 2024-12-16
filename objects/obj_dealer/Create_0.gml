@@ -76,6 +76,7 @@ narrator = instance_nearest(x,y,obj_narrator);
 damage_list = ds_list_create();
 
 part_system_clear(global.partSystem)
+part_system_automatic_draw(global.playerCharge, false);
 
 //----------------------------------RPS LOGIC------------------------------------
 
@@ -84,13 +85,13 @@ function attack(attacker){
 	{
 		narrator.text += "Player attacks! ";
 		var _calc_str = "Opponent takes ";
-		_calc_str += string(1 + obj_dealer.player_is_charged);
+		_calc_str += string(1 + player_is_charged);
 		_calc_str += " damage!\n"
 		narrator.text += _calc_str;
 		
 		ds_list_add(damage_list, 1);
 		if(player_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			player_is_charged = 0;
 		}
 		for(i=0;i<ds_list_size(damage_list); i++){
@@ -106,13 +107,13 @@ function attack(attacker){
 	{
 		narrator.text += "Opponent attacks! ";
 		var _calc_str = "Player takes ";
-		_calc_str += string(1 + obj_dealer.opp_is_charged);
+		_calc_str += string(1 + opp_is_charged);
 		_calc_str += " damage!\n"
 		narrator.text += _calc_str;
 		
 		ds_list_add(damage_list, 1);
 		if(opp_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			opp_is_charged = 0;
 		}
 		for(i=0;i<ds_list_size(damage_list); i++){
@@ -137,17 +138,17 @@ function parry(parrier){
 	{
 		narrator.text += "Player parries! "
 		var _calc_str = "Opponent takes ";
-		_calc_str += string(2 + obj_dealer.player_is_charged + obj_dealer.opp_is_charged);
+		_calc_str += string(2 + player_is_charged + opp_is_charged);
 		_calc_str += " damage!\n"
 		narrator.text += _calc_str;
 		
 		ds_list_add(damage_list, 2);
 		if(player_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			player_is_charged = 0;
 		}
 		if(opp_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			opp_is_charged = 0;
 		}
 		for(i=0;i<ds_list_size(damage_list); i++){
@@ -164,17 +165,17 @@ function parry(parrier){
 	{
 		narrator.text += "Opponent parries!\n"
 		var _calc_str = "Player takes ";
-		_calc_str += string(2 + obj_dealer.player_is_charged + obj_dealer.opp_is_charged);
+		_calc_str += string(2 + player_is_charged + opp_is_charged);
 		_calc_str += " damage!\n"
 		narrator.text += _calc_str;
 		
 		ds_list_add(damage_list, 2);
 		if(player_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			player_is_charged = 0;
 		}
 		if(opp_is_charged){
-			ds_list_add(damage_list, 1);
+			ds_list_add(damage_list, 2);
 			opp_is_charged = 0;
 		}
 		for(i=0;i<ds_list_size(damage_list); i++){

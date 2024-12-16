@@ -243,75 +243,72 @@ switch(global.state){
 		
 	
 	case STATES.RESHUFFLE:
-		
-		if(move_timer%3==0){
 			
-			#region //------------------------RESHUFFLING PHASE ONE---------------------
-			if(cards_shuffled<num_cards and !movement_done)
+		#region //------------------------RESHUFFLING PHASE ONE---------------------
+		if(cards_shuffled<num_cards and !movement_done)
+		{
+			var _new_card = ds_list_find_value(discard, ds_list_size(discard)-cards_shuffled-1);
+			_new_card.face_up = false;
+			_new_card.in_player_hand = false;
+			_new_card.in_opp_hand = false;
+			_new_card.target_x = x;
+			_new_card.target_y = y - (deck_y_offset * cards_shuffled);
+			
+			_new_card.depth = num_cards - cards_shuffled;
+				
+			cards_shuffled++;
+				
+			audio_play_sound(snd_card, 1, false);
+		}
+		#endregion
+			
+		else if(!movement_done)
+		{
+			var _last_card = ds_list_find_value(discard, 0);
+			if(_last_card.x == _last_card.target_x and _last_card.y == _last_card.target_y)
 			{
-				var _new_card = ds_list_find_value(discard, ds_list_size(discard)-cards_shuffled-1);
-				_new_card.face_up = false;
-				_new_card.in_player_hand = false;
-				_new_card.in_opp_hand = false;
-				_new_card.target_x = x;
-				_new_card.target_y = y - (deck_y_offset * cards_shuffled);
-			
-				_new_card.depth = num_cards - cards_shuffled;
-				
-				cards_shuffled++;
-				
-				audio_play_sound(snd_card, 1, false);
-			}
-			#endregion
-			
-			else if(!movement_done)
-			{
-				var _last_card = ds_list_find_value(discard, 0);
-				if(_last_card.x == _last_card.target_x and _last_card.y == _last_card.target_y)
-				{
-					movement_done = true;
-					cards_shuffled = 0;
-					randomize();
-					ds_list_shuffle(discard);
-				}
-				
-			}
-			
-			#region //------------------------RESHUFFLING PHASE TWO---------------------
-			
-			/*
-			Cards are still in DISCARD pile when they arrive at left stack
-			Card list is shuffled first in data
-			Cards are then moved visually to match from discard to deck
-			
-			*/
-			else if(ds_list_size(discard)>0 and movement_done)
-			{
-				/*
-				var _active_card = ds_list_find_value(discard, 0);
-				ds_list_delete(discard, 0);
-				*/
-				var _active_card = ds_list_find_value(discard, ds_list_size(discard)-1);
-				ds_list_delete(discard, ds_list_size(discard)-1);
-				ds_list_add(deck, _active_card);
-				_active_card.depth = num_cards - (ds_list_size(deck)-1);
-				_active_card.target_y = y - (deck_y_offset * (ds_list_size(deck)-1));
-				
-				audio_play_sound(snd_card, 1, false);
-				
-				//show_debug_message(ds_list_size(deck));
-			}
-			#endregion
-			
-			else{
-				/*
-				randomize();
-				ds_list_shuffle(deck);
-				*/
+				movement_done = true;
 				cards_shuffled = 0;
-				movement_done = false;
-				global.state = STATES.DEAL;
+				randomize();
+				ds_list_shuffle(discard);
 			}
+				
+		}
+			
+		#region //------------------------RESHUFFLING PHASE TWO---------------------
+			
+		/*
+		Cards are still in DISCARD pile when they arrive at left stack
+		Card list is shuffled first in data
+		Cards are then moved visually to match from discard to deck
+			
+		*/
+		else if(ds_list_size(discard)>0 and movement_done)
+		{
+			/*
+			var _active_card = ds_list_find_value(discard, 0);
+			ds_list_delete(discard, 0);
+			*/
+			var _active_card = ds_list_find_value(discard, ds_list_size(discard)-1);
+			ds_list_delete(discard, ds_list_size(discard)-1);
+			ds_list_add(deck, _active_card);
+			_active_card.depth = num_cards - (ds_list_size(deck)-1);
+			_active_card.target_y = y - (deck_y_offset * (ds_list_size(deck)-1));
+				
+			audio_play_sound(snd_card, 1, false);
+				
+			//show_debug_message(ds_list_size(deck));
+		}
+		#endregion
+			
+		else{
+			/*
+			randomize();
+			ds_list_shuffle(deck);
+			*/
+			cards_shuffled = 0;
+			movement_done = false;
+			global.state = STATES.DEAL;
 		}
 		break;
 	
@@ -324,7 +321,7 @@ if(move_timer == 30){
 }
 
 if(player_is_charged){
-	part_particles_create(global.partSystem, irandom_range(-5, room_width+5), room_height+5, global.ptPlayerCharge, 10);
+	part_particles_create(global.playerCharge, irandom_range(-5, room_width+5), room_height+5, global.ptPlayerCharge, 10);
 }
 
 if(opp_is_charged){

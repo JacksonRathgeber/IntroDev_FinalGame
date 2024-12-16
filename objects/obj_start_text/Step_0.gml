@@ -12,6 +12,7 @@ x = lerp(x, x+scroll_speed, 0.08);
 if(keyboard_check_pressed(vk_space)){
 	audio_stop_all();
 	part_particles_clear(global.partSystem);
+	audio_play_sound(snd_start, 1, false);
 	transition_layer = TransitionStart(rm_main, seq_fade_out, seq_fade_in);
 }
 

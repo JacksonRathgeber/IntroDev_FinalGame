@@ -41,9 +41,9 @@ function draw_text_scrolling(text_x, text_y, text_str, text_spd, text_slp, text_
         
                 _text_char = min(_text_char, string_length(text_str));
 
-                if (text_ind > _text_prev) && (text_snd != undefined) && audio_exists(text_snd){
+                if (text_ind > _text_prev) && (text_ind%4==0) && (text_snd != undefined) && audio_exists(text_snd){
             
-                    audio_stop_sound(text_snd);
+                    //audio_stop_sound(text_snd);
                     audio_play_sound(text_snd, 0, false);
             
                 }
