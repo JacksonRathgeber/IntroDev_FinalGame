@@ -22,3 +22,10 @@ green CHARGE cards (depicting an up arrow).
 
 
 Press SPACE to begin the game.");
+
+/*
+Each round, click a card from your hand to play it.
+Deal damage to your opponent with red ATTACK cards (depicting a sword).
+Reflect your opponent's attack with blue PARRY cards (depicting a shield).
+Power up your next attack or parry with green CHARGE cards (depicting an up arrow).
+*/
